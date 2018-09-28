@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+import HeaderNav from "./comm/HeaderNav";
 import {
 	StyleSheet,
 	Text,
@@ -7,10 +7,21 @@ import {
 } from 'react-native';
 
 class User extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			headerTitle:'我的'
+		};
+	}
+
 	render() {
+		const { headerTitle } = this.state;
 		return (
 			<View style={ styles.userCon }>
-				<Text>user</Text>
+				<HeaderNav headerTitle={ headerTitle }/>
+				<View style={ styles.userMain }>
+					<Text>user</Text>
+				</View>
 			</View>
 		);
 	}
@@ -20,6 +31,9 @@ export default User;
 
 const styles = StyleSheet.create({
 	userCon: {
+		flex          : 1,
+	},
+	userMain: {
 		flex          : 1,
 		alignItems    : 'center',
 		justifyContent: 'center',

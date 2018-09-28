@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+import HeaderNav from "./comm/HeaderNav";
 import {
 	StyleSheet,
 	Text,
@@ -7,10 +7,22 @@ import {
 } from 'react-native';
 
 class Mail extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			headerTitle: '联系人'
+		};
+	}
+
 	render() {
+		const { headerTitle } = this.state;
 		return (
 			<View style={ styles.mailCon }>
-				<Text>Mail</Text>
+				<HeaderNav headerTitle={ headerTitle }/>
+				<View style={ styles.mailMain }>
+					<Text onPress={ ()=>{InfoNavigation.setParams({ "tarBarIndex": 100 });} }>Info231231</Text>
+					<Text>Mail</Text>
+				</View>
 			</View>
 		);
 	}
@@ -19,7 +31,10 @@ class Mail extends React.Component {
 export default Mail;
 
 const styles = StyleSheet.create({
-	mailCon: {
+	mailCon : {
+		flex: 1,
+	},
+	mailMain: {
 		flex          : 1,
 		alignItems    : 'center',
 		justifyContent: 'center',
