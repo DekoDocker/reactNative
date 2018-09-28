@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { StackActions, NavigationActions } from 'react-navigation';
 import {
 	StyleSheet,
