@@ -15,8 +15,8 @@ const RouteConfigs             = {
 				const { params } = navigation.state;
 				return <TabBarItem tintColor={ tintColor } focused={ focused }
 								   tarBarIndex={ params ? params.tarBarIndex : 0 }
-								   normalImage={ require('../../res/images/info.png') }
-								   selectedImage={ require('../../res/images/info.png') }/>
+								   normalImage={ require('../../res/images/tab/info.png') }
+								   selectedImage={ require('../../res/images/tab/info.png') }/>
 			},
 		}),
 	},
@@ -28,8 +28,8 @@ const RouteConfigs             = {
 				const { params } = navigation.state;
 				return <TabBarItem tintColor={ tintColor } focused={ focused }
 								   tarBarIndex={ params ? params.tarBarIndex : 0 }
-								   normalImage={ require('../../res/images/mail.png') }
-								   selectedImage={ require('../../res/images/mail.png') }/>
+								   normalImage={ require('../../res/images/tab/mail.png') }
+								   selectedImage={ require('../../res/images/tab/mail.png') }/>
 			},
 		}),
 	},
@@ -41,8 +41,8 @@ const RouteConfigs             = {
 				const { params } = navigation.state;
 				return <TabBarItem tintColor={ tintColor } focused={ focused }
 								   tarBarIndex={ params ? params.tarBarIndex : 0 }
-								   normalImage={ require('../../res/images/user.png') }
-								   selectedImage={ require('../../res/images/user.png') }/>
+								   normalImage={ require('../../res/images/tab/user.png') }
+								   selectedImage={ require('../../res/images/tab/user.png') }/>
 			},
 		}),
 	},

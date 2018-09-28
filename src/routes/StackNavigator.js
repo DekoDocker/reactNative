@@ -3,9 +3,9 @@ import { createStackNavigator } from 'react-navigation';
 import * as router from '../constants/RouterConstants';
 import TabNavigator from './TabNavigator';
 import SignInScreen from '../page/SignInPage';
-import createStorage from "../cache/storage";
+import init from '../utils/init';
 
-createStorage();
+init();
 const RouteConfigs         = {
 	Main  : {
 		screen: TabNavigator,

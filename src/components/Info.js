@@ -1,6 +1,6 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { StackActions, NavigationActions } from 'react-navigation';
+import HeaderNav from './comm/HeaderNav';
 import {
 	StyleSheet,
 	Text,
@@ -8,9 +8,19 @@ import {
 } from 'react-native';
 
 class Info extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state    = {
+			headerTitle: '消息'
+		};
+		global.InfoNavigation = this.props.navigation;
+	}
+
 	render() {
+		const { headerTitle } = this.state;
 		return (
 			<View style={ styles.infoCon }>
+				<HeaderNav headerTitle={ headerTitle }/>
 				<Text onPress={ this._setTarBarIndex }>Info231231</Text>
 				<Text onPress={ this._onLogout }>Info</Text>
 			</View>
@@ -18,8 +28,7 @@ class Info extends React.Component {
 	}
 
 	_setTarBarIndex = () => {
-		const { navigation } = this.props;
-		navigation.setParams({ "tarBarIndex": 10 });
+		InfoNavigation.setParams({ "tarBarIndex": 100 });
 	};
 	_onLogout       = () => {
 		const { storageKeys, navigation, router } = this.props;
@@ -38,8 +47,6 @@ export default Info;
 
 const styles = StyleSheet.create({
 	infoCon: {
-		flex          : 1,
-		alignItems    : 'center',
-		justifyContent: 'center',
+		flex: 1,
 	},
 });
