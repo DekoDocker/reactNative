@@ -3,14 +3,14 @@ import { createStackNavigator } from 'react-navigation';
 import * as router from '../constants/RouterConstants';
 import TabNavigator from './TabNavigator';
 import SignInScreen from '../page/SignInPage';
+import InfoSendScreen from '../page/InfoSendPage';
 import init from '../utils/init';
 
 init();
 const RouteConfigs         = {
-	Main  : {
-		screen: TabNavigator,
-	},
-	SignIn: { screen: SignInScreen },
+	Main    : { screen: TabNavigator, },
+	SignIn  : { screen: SignInScreen, },
+	InfoSend: { screen: InfoSendScreen, },
 };
 const StackNavigatorConfig = (isSignIn) => {
 	return {

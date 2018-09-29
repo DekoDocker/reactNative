@@ -20,7 +20,7 @@ class Mail extends React.Component {
 			<View style={ styles.mailCon }>
 				<HeaderNav headerTitle={ headerTitle }/>
 				<View style={ styles.mailMain }>
-					<Text onPress={ ()=>{InfoNavigation.setParams({ "tarBarIndex": 100 });} }>Info231231</Text>
+					{/*<Text onPress={ ()=>{InfoNavigation.setParams({ "tarBarIndex": 100 });} }>Info231231</Text>*/}
 					<Text>Mail</Text>
 				</View>
 			</View>

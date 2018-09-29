@@ -19,34 +19,35 @@ class InfoItem extends React.Component {
 	}
 
 	initInfoItemRightBtns = () => {
+		const { item,onReadInfoItem ,onDelInfoItem} = this.props;
 		let infoItemRightBtns = [
 			{
-				text           : this.props.item.noRead !== 0 ? '标记已读' : '标记未读',
+				text           : item.noRead !== 0 ? '标记已读' : '标记未读',
 				backgroundColor: '#F78D3F',
 				color          : '#fff',
 				underlayColor  : '#F78D3F',
-				onPress        : () => this.props.onReadInfoItem(this.props.item),
+				onPress        : () => onReadInfoItem(item),
 			},
 			{
 				text           : '删除',
 				backgroundColor: '#f22c5e',
 				color          : '#fff',
 				underlayColor  : '#f22c5e',
-				onPress        : () => this.props.onDelInfoItem(this.props.item),
+				onPress        : () => onDelInfoItem(item),
 			},
 		];
 		return infoItemRightBtns;
 	};
 
 	render() {
-		const { item, maxWidth, maxHeight, iFaceWidth, sectionID, rowID } = this.props;
+		const { item, maxWidth, maxHeight, iFaceWidth, sectionID, rowID, setInfoListScrollEnabled, toInfoSend } = this.props;
 		return (
 			<Swipeout autoClose={ true } backgroundColor={ '#fff' } right={ this.initInfoItemRightBtns() }
 					  close={ !(this.state.sectionID === sectionID && this.state.rowID === rowID) }
 					  sectionID={ item.key } rowID={ rowID } onOpen={ this._onOpen }
-					  scroll={ scrollEnabled => { this.props.setInfoListScrollEnabled(scrollEnabled)} }
+					  scroll={ scrollEnabled => { setInfoListScrollEnabled(scrollEnabled)} }
 			>
-				<TouchableHighlight activeOpacity={ 0.8 } onPress={ () => {alert(2)} }>
+				<TouchableHighlight activeOpacity={ 0.8 } onPress={ () => {toInfoSend(item);} }>
 					<View style={ [ styles.infoItemCon, { width: maxWidth, height: maxHeight, } ] }>
 						<View style={ [ styles.infoItemIFace, { width: iFaceWidth, height: maxHeight, } ] }>
 							<Image source={ require('../../res/images/comm/iface.jpg') }

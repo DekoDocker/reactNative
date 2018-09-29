@@ -13,11 +13,11 @@ class BackBtn extends React.Component {
 	}
 
 	render() {
-		const { backTitle } = this.props;
+		const { backTitle, navigation } = this.props;
 		return (
 			<TouchableOpacity style={ styles.backCon }
 							  activeOpacity={ 0.5 }
-							  onPress={ () => {alert(1)} }>
+							  onPress={ () => {navigation.pop()} }>
 				<Image source={ require('../../../res/images/comm/back.png') }
 					   style={ { width: 17, height: 17, } }/>
 				{ backTitle ?

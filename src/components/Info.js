@@ -14,7 +14,7 @@ const _infoItemMaxHeight_ = 55;
 class Info extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state            = {
+		this.state = {
 			headerTitle          : '消息',
 			refreshing           : false,
 			infoList             : [],
@@ -22,7 +22,7 @@ class Info extends React.Component {
 			InfoListScrollEnabled: true,
 		};
 		global.InfoNavigation = this.props.navigation;
-		this.eject            = undefined;
+		this.eject = undefined;
 	}
 
 	componentWillMount() {
@@ -83,6 +83,27 @@ class Info extends React.Component {
 		);
 	}
 
+	_toInfoSend             = (item) => {
+		const { navigation, router } = this.props;
+		// navigation.navigate("InfoSend");
+		// console.warn(navigation);
+		let infoList = this.state.infoList;
+		let index    = infoList.indexOf(item);
+		item.noRead  = 0;
+		infoList.splice(index, item);
+		this.setState({ infoList }, () => {
+			let badgeCount = this._updTabBarBadgeCount();
+			let backTitle  = badgeCount > 99 ? this.state.headerTitle + '(99+)' : badgeCount !== 0 ? this.state.headerTitle + '(' + badgeCount + ')' : this.state.headerTitle;
+
+			navigation.navigate({
+				routeName: router.INFOSEND_PATH.key,
+				params   : {
+					headerTitle: item.username,
+					backTitle  : backTitle,
+				},
+			});
+		});
+	};
 	_onRefresh              = () => {
 		this.setState({ refreshing: true, });
 		setTimeout(() => {
@@ -182,7 +203,8 @@ class Info extends React.Component {
 	_renderItem             = ({ item, index }) => {
 		return <InfoItem item={ item } maxWidth={ _infoItemMaxWidth_ } maxHeight={ _infoItemMaxHeight_ }
 						 onDelInfoItem={ this._onDelInfoItem } onReadInfoItem={ this._onReadInfoItem }
-						 iFaceWidth={ _iFaceWidth_ } rowID={ index } sectionID={ this.state.sectionID }
+						 toInfoSend={ this._toInfoSend } iFaceWidth={ _iFaceWidth_ }
+						 sectionID={ this.state.sectionID } rowID={ index }
 						 setSectionID={ (sectionID) => { this.setState({ sectionID }) } }
 						 setInfoListScrollEnabled={ (InfoListScrollEnabled) => {
 							 if (this.state.InfoListScrollEnabled !== InfoListScrollEnabled) {
@@ -216,9 +238,11 @@ class Info extends React.Component {
 		let tabBarBadgeCount = 0;
 		infoList.forEach(it => { tabBarBadgeCount += it.noRead; });
 		this._setTarBarIndex(tabBarBadgeCount);
+		return tabBarBadgeCount;
 	};
 	_setTarBarIndex         = (tarBarIndex) => {
-		InfoNavigation.setParams({ "tarBarIndex": tarBarIndex });
+		const { navigation } = this.props;
+		navigation.setParams({ "tarBarIndex": tarBarIndex });
 	};
 }
 

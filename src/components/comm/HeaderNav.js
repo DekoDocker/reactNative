@@ -20,21 +20,22 @@ class HeaderNav extends React.Component {
 	}
 
 	render() {
-		const { headerTitle, leftComponent, rightComponent, backTitle, } = this.props;
+		const { headerTitle, leftComponent, rightComponent, backTitle, navigation } = this.props;
 		return (
-			<View style={ [styles.headerCon, { height: this.state.headerConHeightMax, }] }>
+			<View style={ [ styles.headerCon, { height: this.state.headerConHeightMax, } ] }>
 				<StatusBar barStyle={ 'light-content' }/>
-				<View style={ [styles.headerView, { paddingTop: this.state.headerStatusBarHeightMax, }] }>
+				<View style={ [ styles.headerView, { paddingTop: this.state.headerStatusBarHeightMax, } ] }>
 					<View
-						style={ [styles.headerLeft, { height: this.state.headerConHeightMax - this.state.headerStatusBarHeightMax, }] }>
-						{ backTitle ? <BackBtn backTitle={ backTitle }/> : leftComponent }
+						style={ [ styles.headerLeft, { height: this.state.headerConHeightMax - this.state.headerStatusBarHeightMax, } ] }>
+						{ backTitle ? <BackBtn navigation={ navigation } backTitle={ backTitle }/> : leftComponent }
 					</View>
 					<View
-						style={ [styles.headerTitle, { height: this.state.headerConHeightMax - this.state.headerStatusBarHeightMax, }] }>
-						<Text ellipsizeMode={ 'tail' } numberOfLines={1} style={ { fontSize: 16, color: '#fff', } }>{ headerTitle }</Text>
+						style={ [ styles.headerTitle, { height: this.state.headerConHeightMax - this.state.headerStatusBarHeightMax, } ] }>
+						<Text ellipsizeMode={ 'tail' } numberOfLines={ 1 }
+							  style={ { fontSize: 16, color: '#fff', } }>{ headerTitle }</Text>
 					</View>
 					<View
-						style={ [styles.headerRight, { height: this.state.headerConHeightMax - this.state.headerStatusBarHeightMax, }] }>
+						style={ [ styles.headerRight, { height: this.state.headerConHeightMax - this.state.headerStatusBarHeightMax, } ] }>
 						{ rightComponent }
 					</View>
 				</View>
