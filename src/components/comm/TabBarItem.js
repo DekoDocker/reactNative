@@ -14,9 +14,9 @@ class TabBarItem extends React.Component {
 				<Image source={ focused ? selectedImage : normalImage }
 					   style={ { tintColor: tintColor, width: 25, height: 25 } }/>
 				{ tarBarIndex && tarBarIndex > 0 ?
-					<View style={ [styles.tabBarBadge, {
-						right: tarBarIndex > 99 ? -25 : tarBarIndex > 9 ? 15 : 10,
-					}] }>
+					<View style={ [ styles.tabBarBadge, {
+						right: tarBarIndex > 99 ? -25 : tarBarIndex > 9 ? -15 : -10,
+					} ] }>
 						<Text style={ { fontSize: 12, textAlign: 'center', color: '#fff' } }>
 							{ tarBarIndex > 99 ? '99+' : tarBarIndex }</Text>
 					</View>
