@@ -1,6 +1,7 @@
 import React from "react";
 import { NavigationActions, StackActions } from 'react-navigation';
 import HeaderNav from './comm/HeaderNav';
+import Eject from './comm/Eject';
 import InfoItem from './InfoItem';
 import { Dimensions, FlatList, Image, ListView, RefreshControl, StyleSheet, Text, View, } from 'react-native';
 
@@ -21,6 +22,7 @@ class Info extends React.Component {
 			InfoListScrollEnabled: true,
 		};
 		global.InfoNavigation = this.props.navigation;
+		this.eject            = undefined;
 	}
 
 	componentWillMount() {
@@ -62,6 +64,7 @@ class Info extends React.Component {
 			title="拼命加载中..."/>;
 		return (
 			<View style={ styles.infoCon }>
+				<Eject ref={ (c) => this.eject = c }/>
 				<HeaderNav headerTitle={ headerTitle }/>
 				<FlatList
 					style={ styles.infoListCon }
@@ -159,6 +162,7 @@ class Info extends React.Component {
 			this.setState({ infoList }, () => {
 				this._updTabBarBadgeCount();
 				this.setState({ refreshing: false });
+				this.eject._openEject("INFO", "刷新成功")
 			});
 		}, 2000);
 	};
