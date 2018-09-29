@@ -1,17 +1,8 @@
 import React from "react";
-import { StackActions, NavigationActions } from 'react-navigation';
+import { NavigationActions, StackActions } from 'react-navigation';
 import HeaderNav from './comm/HeaderNav';
 import InfoItem from './InfoItem';
-import {
-	StyleSheet,
-	Dimensions,
-	Text,
-	View,
-	Image,
-	FlatList,
-	ListView,
-	RefreshControl,
-} from 'react-native';
+import { Dimensions, FlatList, Image, ListView, RefreshControl, StyleSheet, Text, View, } from 'react-native';
 
 const _width_             = Dimensions.get('window').width;
 const _height_            = Dimensions.get('window').height;
@@ -23,22 +14,42 @@ class Info extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state            = {
-			headerTitle: '消息',
-			refreshing : false,
-			infoList   : [],
-			sectionID  : -1,
+			headerTitle          : '消息',
+			refreshing           : false,
+			infoList             : [],
+			sectionID            : -1,
+			InfoListScrollEnabled: true,
 		};
 		global.InfoNavigation = this.props.navigation;
 	}
 
 	componentWillMount() {
-		let infoList = [
-			{ key: 'item1', username: 'username 1', msg: 'Title Text item1', lastTime: '20:20:20', noRead: 99,isSend:false },
-			{ key: 'item2', username: 'username 2', msg: 'Title Text item2', lastTime: '20:20:20', noRead: 99,isSend:false },
-			{ key: 'item3', username: 'username 3', msg: 'Title Text item3', lastTime: '20:20:20', noRead: 99,isSend:true },
-			{ key: 'item4', username: 'username 4', msg: 'Title Text item4', lastTime: '20:20:20', noRead: 99,isSend:false }
-		];
-		this.setState({ infoList });
+		let infoList = [];
+		infoList.push({
+			key     : 'item' + new Date().getTime() + parseInt(infoList.length + 1),
+			username: 'username ' + parseInt(infoList.length + 1),
+			msg     : 'Title Text item ' + parseInt(infoList.length + 1),
+			lastTime: '20:20:20',
+			noRead  : parseInt(Math.random() * (100 - 1 + 1) + 1, 10),
+			isSend  : false
+		});
+		infoList.push({
+			key     : 'item' + new Date().getTime() + parseInt(infoList.length + 1),
+			username: 'username ' + parseInt(infoList.length + 1),
+			msg     : 'Title Text item ' + parseInt(infoList.length + 1),
+			lastTime: '20:20:20',
+			noRead  : parseInt(Math.random() * (100 - 1 + 1) + 1, 10),
+			isSend  : false
+		});
+		infoList.push({
+			key     : 'item' + new Date().getTime() + parseInt(infoList.length + 1),
+			username: 'username ' + parseInt(infoList.length + 1),
+			msg     : 'Title Text item ' + parseInt(infoList.length + 1),
+			lastTime: '20:20:20',
+			noRead  : parseInt(Math.random() * (100 - 1 + 1) + 1, 10),
+			isSend  : false
+		});
+		this.setState({ infoList }, () => {this._updTabBarBadgeCount()});
 	}
 
 	render() {
@@ -56,6 +67,7 @@ class Info extends React.Component {
 					style={ styles.infoListCon }
 					numColumns={ 1 }
 					data={ this.state.infoList }
+					scrollEnabled={ this.state.InfoListScrollEnabled }
 					extraData={ this.state }
 					keyExtractor={ (item, index) => item.key }
 					renderItem={ this._renderItem }
@@ -70,12 +82,112 @@ class Info extends React.Component {
 
 	_onRefresh              = () => {
 		this.setState({ refreshing: true, });
-		setTimeout(() => {this.setState({ refreshing: false })}, 2000);
+		setTimeout(() => {
+			let infoList = this.state.infoList;
+			infoList.push({
+				key     : 'item' + new Date().getTime() + parseInt(infoList.length + 1),
+				username: 'username ' + parseInt(infoList.length + 1),
+				msg     : 'Title Text item ' + parseInt(infoList.length + 1),
+				lastTime: '20:20:20',
+				noRead  : parseInt(Math.random() * (100 - 1 + 1) + 1, 10),
+				isSend  : false
+			});
+			infoList.push({
+				key     : 'item' + new Date().getTime() + parseInt(infoList.length + 1),
+				username: 'username ' + parseInt(infoList.length + 1),
+				msg     : 'Title Text item ' + parseInt(infoList.length + 1),
+				lastTime: '20:20:20',
+				noRead  : parseInt(Math.random() * (100 - 1 + 1) + 1, 10),
+				isSend  : false
+			});
+			infoList.push({
+				key     : 'item' + new Date().getTime() + parseInt(infoList.length + 1),
+				username: 'username ' + parseInt(infoList.length + 1),
+				msg     : 'Title Text item ' + parseInt(infoList.length + 1),
+				lastTime: '20:20:20',
+				noRead  : parseInt(Math.random() * (100 - 1 + 1) + 1, 10),
+				isSend  : false
+			});
+			infoList.push({
+				key     : 'item' + new Date().getTime() + parseInt(infoList.length + 1),
+				username: 'username ' + parseInt(infoList.length + 1),
+				msg     : 'Title Text item ' + parseInt(infoList.length + 1),
+				lastTime: '20:20:20',
+				noRead  : parseInt(Math.random() * (100 - 1 + 1) + 1, 10),
+				isSend  : false
+			});
+			infoList.push({
+				key     : 'item' + new Date().getTime() + parseInt(infoList.length + 1),
+				username: 'username ' + parseInt(infoList.length + 1),
+				msg     : 'Title Text item ' + parseInt(infoList.length + 1),
+				lastTime: '20:20:20',
+				noRead  : parseInt(Math.random() * (100 - 1 + 1) + 1, 10),
+				isSend  : false
+			});
+			infoList.push({
+				key     : 'item' + new Date().getTime() + parseInt(infoList.length + 1),
+				username: 'username ' + parseInt(infoList.length + 1),
+				msg     : 'Title Text item ' + parseInt(infoList.length + 1),
+				lastTime: '20:20:20',
+				noRead  : parseInt(Math.random() * (100 - 1 + 1) + 1, 10),
+				isSend  : false
+			});
+			infoList.push({
+				key     : 'item' + new Date().getTime() + parseInt(infoList.length + 1),
+				username: 'username ' + parseInt(infoList.length + 1),
+				msg     : 'Title Text item ' + parseInt(infoList.length + 1),
+				lastTime: '20:20:20',
+				noRead  : parseInt(Math.random() * (100 - 1 + 1) + 1, 10),
+				isSend  : false
+			});
+			infoList.push({
+				key     : 'item' + new Date().getTime() + parseInt(infoList.length + 1),
+				username: 'username ' + parseInt(infoList.length + 1),
+				msg     : 'Title Text item ' + parseInt(infoList.length + 1),
+				lastTime: '20:20:20',
+				noRead  : parseInt(Math.random() * (100 - 1 + 1) + 1, 10),
+				isSend  : false
+			});
+			infoList.push({
+				key     : 'item' + new Date().getTime() + parseInt(infoList.length + 1),
+				username: 'username ' + parseInt(infoList.length + 1),
+				msg     : 'Title Text item ' + parseInt(infoList.length + 1),
+				lastTime: '20:20:20',
+				noRead  : parseInt(Math.random() * (100 - 1 + 1) + 1, 10),
+				isSend  : false
+			});
+			this.setState({ infoList }, () => {
+				this._updTabBarBadgeCount();
+				this.setState({ refreshing: false });
+			});
+		}, 2000);
+	};
+	_onDelInfoItem          = (item) => {
+		let infoList = this.state.infoList;
+		let index    = infoList.indexOf(item);
+		infoList.splice(index, 1);
+		this.setState({ infoList }, () => {this._updTabBarBadgeCount()});
+	};
+	_onReadInfoItem         = (item) => {
+		let infoList = this.state.infoList;
+		let index    = infoList.indexOf(item);
+		item.noRead  = item.noRead !== 0 ? 0 : 1;
+		infoList.splice(index, item);
+		this.setState({ infoList }, () => {this._updTabBarBadgeCount()});
 	};
 	_renderItem             = ({ item, index }) => {
 		return <InfoItem item={ item } maxWidth={ _infoItemMaxWidth_ } maxHeight={ _infoItemMaxHeight_ }
+						 onDelInfoItem={ this._onDelInfoItem } onReadInfoItem={ this._onReadInfoItem }
 						 iFaceWidth={ _iFaceWidth_ } rowID={ index } sectionID={ this.state.sectionID }
-						 setSectionID={ (sectionID) => { this.setState({ sectionID }) } }/>;
+						 setSectionID={ (sectionID) => { this.setState({ sectionID }) } }
+						 setInfoListScrollEnabled={ (InfoListScrollEnabled) => {
+							 if (this.state.InfoListScrollEnabled !== InfoListScrollEnabled) {
+								 // TODO 滑动时禁止 FlatList Y 轴滚动
+								 // console.warn(InfoListScrollEnabled);
+								 // this.setState({ InfoListScrollEnabled })
+							 }
+						 } }
+		/>;
 	};
 	_ListEmptyComponent     = () => {
 		return <View style={ {
@@ -95,8 +207,14 @@ class Info extends React.Component {
 			<View style={ { width: _width_ - _iFaceWidth_, backgroundColor: '#dfe0e2' } }/>
 		</View>;
 	};
-	_setTarBarIndex         = () => {
-		InfoNavigation.setParams({ "tarBarIndex": 100 });
+	_updTabBarBadgeCount    = () => {
+		let infoList         = this.state.infoList;
+		let tabBarBadgeCount = 0;
+		infoList.forEach(it => { tabBarBadgeCount += it.noRead; });
+		this._setTarBarIndex(tabBarBadgeCount);
+	};
+	_setTarBarIndex         = (tarBarIndex) => {
+		InfoNavigation.setParams({ "tarBarIndex": tarBarIndex });
 	};
 }
 

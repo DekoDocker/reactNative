@@ -13,26 +13,42 @@ class InfoItem extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			sectionID        : '',
-			rowID            : '',
-			rowIds           : [],
-			infoItemRightBtns: [
-				{
-					text: 'Button'
-				}
-			]
+			sectionID: '',
+			rowID    : '',
 		};
 	}
+
+	initInfoItemRightBtns = () => {
+		let infoItemRightBtns = [
+			{
+				text           : this.props.item.noRead !== 0 ? '标记已读' : '标记未读',
+				backgroundColor: '#F78D3F',
+				color          : '#fff',
+				underlayColor  : '#F78D3F',
+				onPress        : () => this.props.onReadInfoItem(this.props.item),
+			},
+			{
+				text           : '删除',
+				backgroundColor: '#f22c5e',
+				color          : '#fff',
+				underlayColor  : '#f22c5e',
+				onPress        : () => this.props.onDelInfoItem(this.props.item),
+			},
+		];
+		return infoItemRightBtns;
+	};
 
 	render() {
 		const { item, maxWidth, maxHeight, iFaceWidth, sectionID, rowID } = this.props;
 		return (
-			<Swipeout autoClose={ true } backgroundColor={ '#fff' } right={ this.state.infoItemRightBtns }
-					  close={ !(this.state.sectionID === sectionID) } rowID={ rowID }
-					  onOpen={ this._onOpen }>
+			<Swipeout autoClose={ true } backgroundColor={ '#fff' } right={ this.initInfoItemRightBtns() }
+					  close={ !(this.state.sectionID === sectionID && this.state.rowID === rowID) }
+					  sectionID={ item.key } rowID={ rowID } onOpen={ this._onOpen }
+					  scroll={ scrollEnabled => { this.props.setInfoListScrollEnabled(scrollEnabled)} }
+			>
 				<TouchableHighlight activeOpacity={ 0.8 } onPress={ () => {alert(2)} }>
-					<View style={ [styles.infoItemCon, { width: maxWidth, height: maxHeight, }] }>
-						<View style={ [styles.infoItemIFace, { width: iFaceWidth, height: maxHeight, }] }>
+					<View style={ [ styles.infoItemCon, { width: maxWidth, height: maxHeight, } ] }>
+						<View style={ [ styles.infoItemIFace, { width: iFaceWidth, height: maxHeight, } ] }>
 							<Image source={ require('../../res/images/comm/iface.jpg') }
 								   style={ { width: 45, height: 45, borderRadius: 45 / 2 } }/>
 						</View>
@@ -58,13 +74,16 @@ class InfoItem extends React.Component {
 									color        : '#777',
 									paddingBottom: .3
 								} }>{ item.lastTime }</Text>
-								<View style={ [styles.infoItemBadge, { paddingTop: .3 }] }>
-									{ item.noRead && item.noRead > 0 ?
+								{ item.noRead && item.noRead > 0 ?
+									<View style={ [ styles.infoItemBadge, {
+										backgroundColor: '#FF2E63',
+										paddingTop     : .3
+									} ] }>
 										<Text style={ {
 											fontSize: 11,
 											color   : '#fff',
-										} }>{ item.noRead > 99 ? '99+' : item.noRead }</Text> : null }
-								</View>
+										} }>{ item.noRead > 99 ? '99+' : item.noRead }</Text>
+									</View> : <View style={ styles.infoItemBadge }/> }
 							</View>
 						</View>
 					</View>
@@ -74,13 +93,11 @@ class InfoItem extends React.Component {
 	}
 
 	_onOpen = (sectionID, rowID, direction) => {
-		if(!direction) {
+		if (!direction) {
 			return;
 		}
-		let rowIds = this.state.rowIds;
-		rowIds.push(rowID);
-		this.setState({ sectionID: rowID, rowIds: rowIds });
-		this.props.setSectionID(rowID);
+		this.setState({ sectionID, rowID });
+		this.props.setSectionID(sectionID);
 	};
 }
 
@@ -98,14 +115,13 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 	},
 	infoItemBadge: {
-		overflow       : 'hidden',
-		backgroundColor: '#FF2E63',
-		height         : 18,
-		minWidth       : 18,
-		borderRadius   : 18 / 2,
-		alignItems     : 'center',
-		justifyContent : 'center',
-		paddingLeft    : 6,
-		paddingRight   : 6,
+		overflow      : 'hidden',
+		height        : 18,
+		minWidth      : 18,
+		borderRadius  : 18 / 2,
+		alignItems    : 'center',
+		justifyContent: 'center',
+		paddingLeft   : 6,
+		paddingRight  : 6,
 	},
 });
