@@ -13,14 +13,14 @@ class InfoItem extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			sectionID: '',
+			sectionID: -1,
 			rowID    : '',
 		};
 	}
 
 	initInfoItemRightBtns = () => {
-		const { item,onReadInfoItem ,onDelInfoItem} = this.props;
-		let infoItemRightBtns = [
+		const { item, onReadInfoItem, onDelInfoItem } = this.props;
+		let infoItemRightBtns                         = [
 			{
 				text           : item.noRead !== 0 ? '标记已读' : '标记未读',
 				backgroundColor: '#F78D3F',
@@ -40,12 +40,17 @@ class InfoItem extends React.Component {
 	};
 
 	render() {
-		const { item, maxWidth, maxHeight, iFaceWidth, sectionID, rowID, setInfoListScrollEnabled, toInfoSend } = this.props;
+		const { item, maxWidth, maxHeight, iFaceWidth, sectionID, index, toInfoSend } = this.props;
 		return (
 			<Swipeout autoClose={ true } backgroundColor={ '#fff' } right={ this.initInfoItemRightBtns() }
-					  close={ !(this.state.sectionID === sectionID && this.state.rowID === rowID) }
-					  sectionID={ item.key } rowID={ rowID } onOpen={ this._onOpen }
-					  scroll={ scrollEnabled => { setInfoListScrollEnabled(scrollEnabled)} }
+					  close={ !(this.state.sectionID === sectionID && this.state.rowID === item.key) }
+					  sectionID={ index } rowID={ item.key }
+					  onOpen={ this._onOpen } onClose={ this._onClose }
+					  scroll={ scrollEnabled => {
+						  let rowID = item.key;
+						  this.props.setInfoConfigs(scrollEnabled, index);
+						  this.setState({ sectionID: index, rowID });
+					  } }
 			>
 				<TouchableHighlight activeOpacity={ 0.8 } onPress={ () => {toInfoSend(item);} }>
 					<View style={ [ styles.infoItemCon, { width: maxWidth, height: maxHeight, } ] }>
@@ -93,12 +98,15 @@ class InfoItem extends React.Component {
 		);
 	}
 
-	_onOpen = (sectionID, rowID, direction) => {
+	_onClose = (sectionID, rowId, direction) => {
 		if (!direction) {
 			return;
 		}
-		this.setState({ sectionID, rowID });
-		this.props.setSectionID(sectionID);
+	};
+	_onOpen  = (sectionID, rowID, direction) => {
+		if (!direction) {
+			return;
+		}
 	};
 }
 

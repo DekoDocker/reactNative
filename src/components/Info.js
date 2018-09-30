@@ -14,7 +14,7 @@ const _infoItemMaxHeight_ = 55;
 class Info extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {
+		this.state            = {
 			headerTitle          : '消息',
 			refreshing           : false,
 			infoList             : [],
@@ -22,7 +22,7 @@ class Info extends React.Component {
 			InfoListScrollEnabled: true,
 		};
 		global.InfoNavigation = this.props.navigation;
-		this.eject = undefined;
+		this.eject            = undefined;
 	}
 
 	componentWillMount() {
@@ -85,11 +85,9 @@ class Info extends React.Component {
 
 	_toInfoSend             = (item) => {
 		const { navigation, router } = this.props;
-		// navigation.navigate("InfoSend");
-		// console.warn(navigation);
-		let infoList = this.state.infoList;
-		let index    = infoList.indexOf(item);
-		item.noRead  = 0;
+		let infoList                 = this.state.infoList;
+		let index                    = infoList.indexOf(item);
+		item.noRead                  = 0;
 		infoList.splice(index, item);
 		this.setState({ infoList }, () => {
 			let badgeCount = this._updTabBarBadgeCount();
@@ -102,6 +100,7 @@ class Info extends React.Component {
 					backTitle  : backTitle,
 				},
 			});
+			this.setState({ InfoListScrollEnabled: true, sectionID: -1 })
 		});
 	};
 	_onRefresh              = () => {
@@ -204,13 +203,10 @@ class Info extends React.Component {
 		return <InfoItem item={ item } maxWidth={ _infoItemMaxWidth_ } maxHeight={ _infoItemMaxHeight_ }
 						 onDelInfoItem={ this._onDelInfoItem } onReadInfoItem={ this._onReadInfoItem }
 						 toInfoSend={ this._toInfoSend } iFaceWidth={ _iFaceWidth_ }
-						 sectionID={ this.state.sectionID } rowID={ index }
-						 setSectionID={ (sectionID) => { this.setState({ sectionID }) } }
-						 setInfoListScrollEnabled={ (InfoListScrollEnabled) => {
+						 sectionID={ this.state.sectionID } index={ index }
+						 setInfoConfigs={ (InfoListScrollEnabled, sectionID) => {
 							 if (this.state.InfoListScrollEnabled !== InfoListScrollEnabled) {
-								 // TODO 滑动时禁止 FlatList Y 轴滚动
-								 // console.warn(InfoListScrollEnabled);
-								 // this.setState({ InfoListScrollEnabled })
+								 this.setState({ InfoListScrollEnabled, sectionID })
 							 }
 						 } }
 		/>;
