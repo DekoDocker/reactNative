@@ -26,18 +26,20 @@ class Mail extends React.Component {
 		super(props);
 		this.state       = {
 			headerTitle: '联系人',
-			mailList   : [
-				{ title: 'A', data: [ 'A item1' ] },
-				{ title: 'B', data: [ 'B item3' ] },
-				{ title: 'C', data: [ 'C item5' ] },
-				{ title: 'D', data: [ 'D item5' ] },
-				{ title: 'E', data: [ 'E item5' ] },
-				{ title: '#', data: [ '$@21dsd' ] },
-			],
+			mailList   : [],
 		};
 		this.sectionList = undefined;
 	}
 
+	componentWillMount() {
+		let mailList = [];
+		mailList.push({ title: 'A', data: [ 'A item1' ] });
+		mailList.push({ title: 'C', data: [ 'C item5' ] });
+		mailList.push({ title: 'D', data: [ 'D item5' ] });
+		mailList.push({ title: 'E', data: [ 'E item5' ] });
+		mailList.push({ title: '#', data: [ '$@21dsd' ] });
+		this.setState({ mailList });
+	}
 
 	render() {
 		const { headerTitle } = this.state;
@@ -101,6 +103,9 @@ class Mail extends React.Component {
 	};
 	_scrollToLocation    = (data) => {
 		this.sectionList.scrollToLocation(data);
+	};
+	_setTarBarIndex = (tarBarIndex) => {
+		InfoNavigation.setParams({ "tarBarIndex": tarBarIndex });
 	};
 }
 

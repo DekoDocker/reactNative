@@ -48,7 +48,7 @@ const RouteConfigs             = {
 	},
 };
 const BottomTabNavigatorConfig = {
-	initialRouteName: router.Mail_PATH.key,
+	initialRouteName: router.INFO_PATH.key,
 	backBehavior    : 'none',
 	tabBarOptions   : {
 		activeTintColor        : '#0087cb',
