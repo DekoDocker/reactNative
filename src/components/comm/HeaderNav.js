@@ -49,8 +49,8 @@ export default HeaderNav;
 const styles = StyleSheet.create({
 	headerCon  : {
 		width          : _width_,
-		backgroundColor: '#63b5ff',
-		// backgroundColor: '#252A34',
+		// backgroundColor: '#63b5ff',
+		backgroundColor: '#252A34',
 	},
 	headerView : {
 		flex         : 1,
