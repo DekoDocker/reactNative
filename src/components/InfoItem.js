@@ -40,7 +40,7 @@ class InfoItem extends React.Component {
 	};
 
 	render() {
-		const { item, maxWidth, maxHeight, iFaceWidth, sectionID, index, toInfoSend } = this.props;
+		const { item, maxWidth, maxHeight, iFaceSize, sectionID, index, toInfoSend } = this.props;
 		return (
 			<Swipeout autoClose={ true } backgroundColor={ '#fff' } right={ this.initInfoItemRightBtns() }
 					  close={ !(this.state.sectionID === sectionID && this.state.rowID === item.key) }
@@ -54,7 +54,7 @@ class InfoItem extends React.Component {
 			>
 				<TouchableHighlight activeOpacity={ 0.8 } onPress={ () => {toInfoSend(item);} }>
 					<View style={ [ styles.infoItemCon, { width: maxWidth, height: maxHeight, } ] }>
-						<View style={ [ styles.infoItemIFace, { width: iFaceWidth, height: maxHeight, } ] }>
+						<View style={ [ styles.infoItemIFace, { width: iFaceSize, height: iFaceSize, } ] }>
 							<Image source={ require('../../res/images/comm/iface.jpg') }
 								   style={ { width: 45, height: 45, borderRadius: 45 / 2 } }/>
 						</View>

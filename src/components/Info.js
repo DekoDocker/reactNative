@@ -7,7 +7,7 @@ import { Dimensions, FlatList, Image, ListView, RefreshControl, StyleSheet, Text
 
 const _width_             = Dimensions.get('window').width;
 const _height_            = Dimensions.get('window').height;
-const _iFaceWidth_        = 55;
+const _iFaceSize_        = 55;
 const _infoItemMaxWidth_  = _width_;
 const _infoItemMaxHeight_ = 55;
 
@@ -202,7 +202,7 @@ class Info extends React.Component {
 	_renderItem             = ({ item, index }) => {
 		return <InfoItem item={ item } maxWidth={ _infoItemMaxWidth_ } maxHeight={ _infoItemMaxHeight_ }
 						 onDelInfoItem={ this._onDelInfoItem } onReadInfoItem={ this._onReadInfoItem }
-						 toInfoSend={ this._toInfoSend } iFaceWidth={ _iFaceWidth_ }
+						 toInfoSend={ this._toInfoSend } iFaceSize={ _iFaceSize_ }
 						 sectionID={ this.state.sectionID } index={ index }
 						 setInfoConfigs={ (InfoListScrollEnabled, sectionID) => {
 							 if (this.state.InfoListScrollEnabled !== InfoListScrollEnabled) {
@@ -225,8 +225,8 @@ class Info extends React.Component {
 	};
 	_ItemSeparatorComponent = () => {
 		return <View style={ { flex: 1, height: 1, flexDirection: 'row' } }>
-			<View style={ { width: _iFaceWidth_ + 5, backgroundColor: '#fff' } }/>
-			<View style={ { width: _width_ - _iFaceWidth_, backgroundColor: '#dfe0e2' } }/>
+			<View style={ { width: _iFaceSize_ + 5, backgroundColor: '#fff' } }/>
+			<View style={ { width: _width_ - _iFaceSize_, backgroundColor: '#dfe0e2' } }/>
 		</View>;
 	};
 	_updTabBarBadgeCount    = () => {
